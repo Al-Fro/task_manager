@@ -16,13 +16,13 @@ class Task < ApplicationRecord
     state :ready_for_release
     state :released
 
-    event :modify do
+    event :start_developmment do
       transition :new_task => :in_development
       transition :in_qa => :in_development
       transition :in_code_review => :in_development
     end
 
-    event :verify do
+    event :start_qa do
       transition :in_development => :in_qa
     end
 
@@ -30,15 +30,15 @@ class Task < ApplicationRecord
       transition :in_qa => :in_code_review
     end
 
-    event :ready_for_release do
+    event :push_for_release do
       transition :in_code_review => :in_ready_for_release
     end
 
-    event :to_release do
+    event :release do
       transition :in_ready_for_release => :released
     end
 
-    event :to_archive do
+    event :archive do
       transition :released => :archived
       transition :new_task => :archived
     end
