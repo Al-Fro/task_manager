@@ -1,0 +1,22 @@
+common: &default_settings
+
+  license_key: eu01xx2622f440529633051cfe8426524c1bNRAL
+
+  app_name: My Application
+
+  log_level: info
+
+development:
+  <<: *default_settings
+  app_name: My Application (Development)
+
+test:
+  <<: *default_settings
+  monitor_mode: false
+
+staging:
+  <<: *default_settings
+  app_name: My Application (Staging)
+
+production:
+  <<: *default_settings
