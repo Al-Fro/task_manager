@@ -1,5 +1,5 @@
 ## Travis-Build, CoverallS       
-[![Build Status](https://travis-ci.com/Al-Fro/task_manager.svg?branch=feature%2Ftravis)](https://travis-ci.com/Al-Fro/task_manager)    [![Coverage Status](https://coveralls.io/repos/github/Al-Fro/task_manager/badge.svg?branch=feature/coveralls)](https://coveralls.io/github/Al-Fro/task_manager?branch=feature/coveralls)
+[![Build Status](https://travis-ci.com/Al-Fro/task_manager.svg?branch=feature%2Ftravis)](https://travis-ci.com/Al-Fro/task_manager)    [![Coverage Status](https://coveralls.io/repos/github/Al-Fro/task_manager/badge.svg)](https://coveralls.io/github/Al-Fro/task_manager)
 
 # README
 
