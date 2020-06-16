@@ -16,8 +16,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
 
   def create
     task = current_user.my_tasks.new(task_params)
-    p task
-    p current_user
+
     if task.save
       UserMailer.with({ user: current_user, task: task }).task_created.deliver_now
     end
@@ -28,12 +27,9 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   def update
     task = Task.find(params[:id])
     task.update(task_params)
-    author = User.find(task.author_id)
-    p author
-    p '202'
-    if task.update(task_params)
-      UserMailer.with({ user: author, task: task }).task_updated.deliver_now
-    end
+    p task
+    user = User.find(task.author_id)
+    UserMailer.with({ user: user, task: task }).task_updated.deliver_now
 
     respond_with(task, serializer: TaskSerializer)
   end
