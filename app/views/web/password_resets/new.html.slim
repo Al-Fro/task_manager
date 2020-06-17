@@ -1,8 +1,8 @@
-h1 PasswordResets#new
-p Find me in app/views/password_resets/new.html.slim
-
-h4 Log in
+h4 Forgot Password
+= simple_form_for @password_reset, url: password_reset_path do |f|
   p
     = f.input :email
   p
-    = f.button  :submit, "Sign in"
+    = f.button  :submit, "Send token"
+
+    
