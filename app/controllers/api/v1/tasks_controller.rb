@@ -26,17 +26,22 @@ class Api::V1::TasksController < Api::V1::ApplicationController
 
   def update
     task = Task.find(params[:id])
-    task.update(task_params)
-    p task
-    user = User.find(task.author_id)
-    UserMailer.with({ user: user, task: task }).task_updated.deliver_now
+
+    if task.update(task_params)
+      user = User.find(task.assignee_id)
+      UserMailer.with({ user: user, task: task }).task_updated.deliver_now
+    end
 
     respond_with(task, serializer: TaskSerializer)
   end
 
   def destroy
     task = Task.find(params[:id])
-    task.destroy
+    
+    if task.destroy
+      user = User.find(task.assignee_id)
+      UserMailer.with({ user: user, task: task }).task_destroyed.deliver_now
+    end
 
     respond_with(task)
   end

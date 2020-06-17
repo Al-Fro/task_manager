@@ -6,5 +6,6 @@ h4 Log in
   p
     = f.input :email
     = f.input :password
+    = link_to "forgot password?", new_password_reset_path, class: 'mdl-navigation__link'
   p
     = f.button  :submit, "Sign in"
