@@ -29,8 +29,8 @@ class Api::V1::TasksControllerTest < ActionController::TestCase
     data = JSON.parse(response.body)
     created_task = Task.find(data['task']['id'])
 
-    assert_equal created_task.assignee, assignee 
-    assert_equal created_task.author, author 
+    assert_equal created_task.assignee, assignee
+    assert_equal created_task.author, author
   end
 
   test 'should put update' do
