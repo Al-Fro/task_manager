@@ -9,7 +9,6 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - docker-compose build
-  - docker-compose run --rm web /bin/sh -c "bundle install; RAILS_ENV=test  bundle exec rails db:create db:migrate"
-script:
-  - yarn install --ignore-engines
-  - docker-compose run --rm web /bin/sh -c "RAILS_ENV=test  bundle exec rake test"
+  - docker-compose run --rm web /bin/sh -c "bundle install; yarn install --ignore-engines; RAILS_ENV=test  bundle exec rails db:create db:migrate"
+script:  
+  - docker-compose run --rm web /bin/sh -c "RAILS_ENV=test CI=true TRAVIS=true TRAVIS_JOB_ID=$TRAVIS_JOB_ID TRAVIS_BRANCH=$TRAVIS_BRANCH bundle exec rails test"
