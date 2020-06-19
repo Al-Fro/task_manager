@@ -68,3 +68,5 @@ gem 'responders'
 gem 'active_model_serializers'
 
 gem 'js-routes'
+gem 'rollbar'
+gem 'newrelic_rpm'
