@@ -4,7 +4,9 @@ class Web::PasswordResetsController < Web::ApplicationController
   end
 
   def edit
-    @user = User.find_by_password_reset_token!(params[:id])
+    if !(@user = User.find_by(password_reset_token: params[:id]))
+      render(:error_page)
+    end
   end
 
   def create
@@ -20,7 +22,9 @@ class Web::PasswordResetsController < Web::ApplicationController
   end
 
   def update
-    @user = User.find_by_password_reset_token!(params[:id])
+    if !(@user = User.find_by(password_reset_token: params[:id]))
+      render(:error_page)
+    end
 
     if @user.password_token_invalid?
       redirect_to(:new_password_reset)
