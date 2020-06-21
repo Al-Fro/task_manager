@@ -1,7 +1,8 @@
 require 'simplecov'
-SimpleCov.start
-
 require 'coveralls'
+require 'sidekiq/testing'
+
+SimpleCov.start
 Coveralls.wear!
 
 ENV['RAILS_ENV'] ||= 'test'

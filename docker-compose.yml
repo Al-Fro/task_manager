@@ -1,6 +1,15 @@
 version: '3.7'
 
 services:
+  sidekiq:
+    build: .
+    command: bundle exec sidekiq -C /app/config/sidekiq.yml
+    environment: *web-environment
+    volumes: *web-volumes
+    depends_on:
+      - redis
+  redis:
+    image: redis:5.0.9-alpine
   web:
     build: .
     volumes: &web-volumes
@@ -14,7 +23,10 @@ services:
       - 3002:3002
     depends_on:
       - db
+      - redis
+      - sidekiq
     environment: &web-environment
+      REDIS_URL: redis://redis
       BUNDLE_PATH: /bundle_cache
       GEM_HOME: /bundle_cache
       GEM_PATH: /bundle_cache
