@@ -28,7 +28,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
     task = Task.find(params[:id])
 
     if task.update(task_params)
-      user = User.find(task.assignee_id)
+      user = task.assignee
       UserMailer.with({ user: user, task: task }).task_updated.deliver_now
     end
 
@@ -39,7 +39,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
     task = Task.find(params[:id])
 
     if task.destroy
-      user = User.find(task.assignee_id)
+      user = task.assignee
       UserMailer.with({ user: user, task: task }).task_destroyed.deliver_now
     end
 

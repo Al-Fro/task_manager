@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  DAY_CONST = 24.hours
+
   has_many :my_tasks, class_name: 'Task', foreign_key: :author_id
   has_many :assigned_tasks, class_name: 'Task', foreign_key: :assignee_id
 
@@ -14,9 +16,8 @@ class User < ApplicationRecord
     save!
   end
 
-  def password_token_invalid?
-    day_constant = 24.hours
-    (password_reset_sent_at + day_constant) < Time.current
+  def password_token_outtimed?
+    (password_reset_sent_at + DAY_CONST) < Time.current
   end
 
   def generate_token

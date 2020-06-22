@@ -2,11 +2,15 @@ class Web::PasswordResetsController < Web::ApplicationController
   def new
     @password_reset = PasswordResetForm.new
   end
+  
+  def check_token
+    if !(@user = User.find_by(password_reset_token: params[:id]))
+      render(:check_token)
+    end
+  end  
 
   def edit
-    if !(@user = User.find_by(password_reset_token: params[:id]))
-      render(:error_page)
-    end
+    check_token
   end
 
   def create
@@ -22,11 +26,9 @@ class Web::PasswordResetsController < Web::ApplicationController
   end
 
   def update
-    if !(@user = User.find_by(password_reset_token: params[:id]))
-      render(:error_page)
-    end
+    check_token
 
-    if @user.password_token_invalid?
+    if @user.password_token_outtimed?
       redirect_to(:new_password_reset)
     elsif @user.update(user_params)
       @user.password_reset_token = nil
