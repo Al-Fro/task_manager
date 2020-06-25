@@ -21,6 +21,8 @@ class User < ApplicationRecord
   end
 
   def generate_token
-    SecureRandom.urlsafe_base64
+    token = SecureRandom.urlsafe_base64
+
+    User.find_by(password_reset_token: token) ? generate_token : token
   end
 end
