@@ -1,4 +1,6 @@
 Rails.application.configure do
+  config.web_console.whitelisted_ips = '172.18.0.1'
+
   config.cache_classes = false
 
   config.eager_load = false

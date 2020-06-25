@@ -19,6 +19,9 @@ gem 'webpacker-react'
 gem 'jbuilder', '~> 2.7'
 
 gem 'sidekiq'
+gem 'sidekiq-failures'
+gem 'sidekiq-throttled'
+gem 'sidekiq-unique-jobs', '~> 6.0.13'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

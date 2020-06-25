@@ -15,7 +15,7 @@ class Web::PasswordResetsController < Web::ApplicationController
 
     if user.present?
       user.generate_password_token!
-      UserMailer.reset_password(user).deliver_now
+      SendResetPasswordNotificationJob.perform_async(user.id)
     end
 
     redirect_to(:new_session)

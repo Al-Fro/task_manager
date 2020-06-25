@@ -1,4 +1,5 @@
 Rails.application.routes.draw do  
+  mount Sidekiq::Web => '/admin/sidekiq'
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root :to => 'web/boards#show'
 

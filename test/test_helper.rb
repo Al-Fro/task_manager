@@ -5,6 +5,8 @@ require 'sidekiq/testing'
 SimpleCov.start
 Coveralls.wear!
 
+Sidekiq::Testing.inline!
+
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
