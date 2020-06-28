@@ -1,6 +1,6 @@
 require 'sidekiq/web'
-require "sidekiq/throttled"
-require "sidekiq/throttled/web"
+require 'sidekiq/throttled'
+require 'sidekiq/throttled/web'
 require 'sidekiq_unique_jobs/web'
 
 Sidekiq.configure_server do |config|
