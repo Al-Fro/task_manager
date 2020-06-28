@@ -61,6 +61,6 @@ class UserMailerTest < ActionMailer::TestCase
     assert_equal ['noreply@taskmanager.com'], email.from
     assert_equal [user.email], email.to
     assert_equal 'Reset Password', email.subject
-    assert email.body.to_s.include?("Hi, #{user.first_name}")
+    assert email.body.to_s.include?("Dear, #{user.first_name}!")
   end
 end
