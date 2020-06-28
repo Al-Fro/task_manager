@@ -16,7 +16,7 @@ class User < ApplicationRecord
     save!
   end
 
-  def password_token_outtimed?
+  def password_token_outdated?
     (password_reset_sent_at + DAY_CONST) < Time.current
   end
 
