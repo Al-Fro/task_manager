@@ -70,3 +70,7 @@ gem 'active_model_serializers'
 gem 'js-routes'
 gem 'rollbar'
 gem 'newrelic_rpm'
+
+gem 'mini_magick'
+gem 'virtus'
+gem 'file_validators'
