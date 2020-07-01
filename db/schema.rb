@@ -43,9 +43,6 @@ ActiveRecord::Schema.define(version: 2020_06_29_173711) do
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "password_reset_token"
-    t.datetime "password_reset_sent_at"
-    t.index ["password_reset_token"], name: "index_users_on_password_reset_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

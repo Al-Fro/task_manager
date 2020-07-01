@@ -1,9 +1,7 @@
 FROM ruby:2.7.1-alpine
 
 ARG RAILS_ROOT=/app
-ARG PACKAGES="vim openssl-dev postgresql-dev build-base curl nodejs yarn less tzdata git postgresql-client bash screen"
-
-RUN apk --update add imagemagick
+ARG PACKAGES="vim openssl-dev postgresql-dev build-base curl nodejs yarn less tzdata git postgresql-client bash screen imagemagick"
 
 RUN apk update \
     && apk upgrade \
