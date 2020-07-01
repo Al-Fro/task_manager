@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: { minimum: 2 }
   validates :last_name, presence: true, length: { minimum: 2 }
   validates :email, presence: true, format: { with: /@/ }, uniqueness: true
+  validates :password_reset_token, uniqueness: true, allow_blank: true
 
   def generate_password_token!
     self.password_reset_token = generate_token
