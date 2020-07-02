@@ -26,4 +26,8 @@ export default {
     const path = routes.apiV1TaskPath(id);
     return FetchHelper.delete(path);
   },
+  // putFormData(id, task) {
+  //   const path = routes.apiV1TaskPath(id);
+  //   return FetchHelper.delete(path, task);
+  // },
 };
