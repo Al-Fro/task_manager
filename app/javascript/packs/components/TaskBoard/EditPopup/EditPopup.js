@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { isNil } from 'ramda';
 
-import Form from 'packs/components/TaskBoard/Form';
 import useStyles from './useStyles';
 
 import Modal from '@material-ui/core/Modal';
@@ -16,6 +15,7 @@ import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 
 import TaskPresenter from 'presenters/TaskPresenter';
+import Form from 'packs/components/TaskBoard/Form';
 
 const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate }) => {
   const [task, setTask] = useState(null);

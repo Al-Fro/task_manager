@@ -1,3 +1,3 @@
-import ImageUpload from './AddPopup';
+import ImageUpload from './ImageUpload';
 
 export default ImageUpload;

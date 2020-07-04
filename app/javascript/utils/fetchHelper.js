@@ -1,5 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
+import { objectToFormData } from 'object-to-formdata';
 
 import { camelize, decamelize } from './keysConverter';
 
@@ -58,22 +59,20 @@ export default {
     return axios.put(url, body).then(camelize);
   },
 
-  delete(url, json) {
-    const body = decamelize(json);
-
-    return axios.delete(url, body).then(camelize);
+  delete(url) {
+    return axios.delete(url).then(camelize);
   },
 
-  // putFormData(url, json) {
-  //   const body = decamelize(json);
-  //   const formData = objectToFormData(body);
+  putFormData(url, json) {
+    const body = decamelize(json);
+    const formData = objectToFormData(body);
 
-  //   return axios
-  //     .put(url, formData, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data',
-  //       },
-  //     })
-  //     .then(camelize);
-  // },
+    return axios
+      .put(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then(camelize);
+  },
 };
