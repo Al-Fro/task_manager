@@ -6,8 +6,8 @@ class Web::PasswordResetsController < Web::ApplicationController
   def create
     @password_reset = PasswordResetForm.new(password_reset_params)
     user = @password_reset.user
-
-    if user.present? && @password_reset.valid?
+    
+    if @password_reset.valid?
       user.generate_password_token!
       UserMailer.reset_password(user).deliver_now
     end
