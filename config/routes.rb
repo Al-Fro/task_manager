@@ -1,4 +1,5 @@
 Rails.application.routes.draw do  
+  default_url_options :host => "localhost:3000"
   root :to => 'web/boards#show'
 
   scope module: :web do
