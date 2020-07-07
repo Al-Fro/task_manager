@@ -4,20 +4,20 @@ import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
 import ReactCrop, { makeAspectCrop } from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 
 import useStyles from './useStyles';
 
 const ImageUpload = ({ onUpload }) => {
   const styles = useStyles();
 
-  console.log('onUpload = ', onUpload);
-
   const defaultPropsParams = {
     unit: 'px',
-    x: 130,
-    y: 50,
+    x: 0,
+    y: 0,
     width: 200,
-    height: 200,
+    height: 100,
+    aspect: 16 / 9,
   };
 
   const [fileAsBase64, changeFileAsBase64] = useState(null);
@@ -58,7 +58,6 @@ const ImageUpload = ({ onUpload }) => {
     e.preventDefault();
 
     const [acceptedFile] = e.target.files;
-
     const fileReader = new FileReader();
     fileReader.onload = handleImageRead;
     fileReader.readAsDataURL(acceptedFile);

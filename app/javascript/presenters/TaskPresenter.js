@@ -11,5 +11,5 @@ export default new PropTypesPresenter({
   author: UserPresenter.shape(),
   assignee: UserPresenter.shape(),
   transitions: PropTypes.array,
-  imageUrl: PropTypes.object,
+  imageUrl: PropTypes.string,
 });

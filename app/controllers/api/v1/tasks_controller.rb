@@ -40,6 +40,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
 
   def attach_image
     task = Task.find(params[:id])
+
     task_attach_image_form = TaskAttachImageForm.new(attachment_params)
 
     if task_attach_image_form.invalid?
@@ -63,7 +64,7 @@ class Api::V1::TasksController < Api::V1::ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :assignee_id, :state_event)
+    params.require(:task).permit(:name, :description, :assignee_id, :state_event, :image)
   end
 
   def attachment_params

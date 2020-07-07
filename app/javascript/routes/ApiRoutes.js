@@ -509,6 +509,9 @@ Based on Rails 6.0.2.2 routes of TaskManager::Application
 // api_v1_users => /api/v1/users(.:format)
   // function(options)
   apiV1UsersPath: Utils.route([["format",false]], {}, [2,[7,"/",false],[2,[6,"api",false],[2,[7,"/",false],[2,[6,"v1",false],[2,[7,"/",false],[2,[6,"users",false],[1,[2,[8,".",false],[3,"format",false]],false]]]]]]]),
+// attach_image_api_v1_task => /api/v1/tasks/:id/attach_image(.:format)
+  // function(id, options)
+  attachImageApiV1TaskPath: Utils.route([["id",true],["format",false]], {}, [2,[7,"/",false],[2,[6,"api",false],[2,[7,"/",false],[2,[6,"v1",false],[2,[7,"/",false],[2,[6,"tasks",false],[2,[7,"/",false],[2,[3,"id",false],[2,[7,"/",false],[2,[6,"attach_image",false],[1,[2,[8,".",false],[3,"format",false]],false]]]]]]]]]]]),
 // board => /board(.:format)
   // function(options)
   boardPath: Utils.route([["format",false]], {}, [2,[7,"/",false],[2,[6,"board",false],[1,[2,[8,".",false],[3,"format",false]],false]]]),
@@ -581,6 +584,9 @@ Based on Rails 6.0.2.2 routes of TaskManager::Application
 // rails_service_blob => /rails/active_storage/blobs/:signed_id/*filename(.:format)
   // function(signed_id, filename, options)
   railsServiceBlobPath: Utils.route([["signed_id",true],["filename",true],["format",false]], {}, [2,[7,"/",false],[2,[6,"rails",false],[2,[7,"/",false],[2,[6,"active_storage",false],[2,[7,"/",false],[2,[6,"blobs",false],[2,[7,"/",false],[2,[3,"signed_id",false],[2,[7,"/",false],[2,[5,[3,"filename",false],false],[1,[2,[8,".",false],[3,"format",false]],false]]]]]]]]]]]),
+// remove_image_api_v1_task => /api/v1/tasks/:id/remove_image(.:format)
+  // function(id, options)
+  removeImageApiV1TaskPath: Utils.route([["id",true],["format",false]], {}, [2,[7,"/",false],[2,[6,"api",false],[2,[7,"/",false],[2,[6,"v1",false],[2,[7,"/",false],[2,[6,"tasks",false],[2,[7,"/",false],[2,[3,"id",false],[2,[7,"/",false],[2,[6,"remove_image",false],[1,[2,[8,".",false],[3,"format",false]],false]]]]]]]]]]]),
 // root => /
   // function(options)
   rootPath: Utils.route([], {}, [7,"/",false]),
