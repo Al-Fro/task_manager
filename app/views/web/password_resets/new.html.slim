@@ -1,0 +1,12 @@
+h4 Forgot Password?
+= simple_form_for @password_reset, url: password_resets_path do |f|
+  p
+    = f.input :email
+  p
+    = f.button :submit, "Recovery password"
+  p
+    | Sign in? 
+    = link_to "Sign in", new_session_path, class: 'mdl-navigation__link'
+  p
+    | Sign up? 
+    = link_to "Sign up", new_developer_path, class: 'mdl-navigation__link'
