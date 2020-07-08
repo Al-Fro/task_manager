@@ -1,4 +1,6 @@
-Rails.application.configure do
+Rails.application.configure do  
+  default_url_options[:host] = 'localhost:3000'
+
   config.cache_classes = false
 
   # Do not eager load code on boot.
