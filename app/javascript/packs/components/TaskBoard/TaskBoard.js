@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import KanbanBoard from '@lourenci/react-kanban';
-import { propOr } from 'ramda';
+import { pick, propOr } from 'ramda';
 
 import TaskForm from 'forms/TaskForm';
 import TasksRepository from 'repositories/TasksRepository';
 import TaskPresenter from 'presenters/TaskPresenter';
+import { decamelize } from 'utils/keysConverter';
 
 import ColumnHeader from './ColumnHeader';
 import AddPopup from './AddPopup';
@@ -134,6 +135,7 @@ const TaskBoard = () => {
 
   const handleTaskCreate = (params) => {
     const attributes = TaskForm.attributesToSubmit(params);
+
     return TasksRepository.create(attributes).then(({ data: { task } }) => {
       loadColumnInitial(TaskPresenter.state(task));
       handleClose();
@@ -154,12 +156,27 @@ const TaskBoard = () => {
   };
 
   const handleTaskDestroy = (task) => {
-    const attributes = TaskForm.attributesToSubmit(task);
-
-    return TasksRepository.destroy(task.id, attributes).then(() => {
+    return TasksRepository.destroy(task.id).then(() => {
       loadColumnInitial(TaskPresenter.state(task));
       handleClose();
     });
+  };
+
+  const handleAttachImage = (task, image) => {
+    const pertmittedKeys = ['cropX', 'cropY', 'cropWidth', 'cropHeight'];
+
+    const body = {
+      attachment: {
+        ...decamelize(pick(pertmittedKeys, image.attachment)),
+        image: image.attachment.image,
+      },
+    };
+
+    return TasksRepository.putFormData(task.id, body);
+  };
+
+  const handleRemoveImage = (task) => {
+    return TasksRepository.removeImage(task.id);
   };
 
   return (
@@ -181,6 +198,8 @@ const TaskBoard = () => {
           onCardUpdate={handleTaskUpdate}
           onClose={handleClose}
           cardId={openedTaskId}
+          onAttachImage={handleAttachImage}
+          onRemoveImage={handleRemoveImage}
         />
       )}
     </>

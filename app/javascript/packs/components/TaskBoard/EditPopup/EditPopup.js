@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { isNil } from 'ramda';
 
-import Form from 'packs/components/TaskBoard/Form';
 import useStyles from './useStyles';
 
 import Modal from '@material-ui/core/Modal';
@@ -16,8 +15,10 @@ import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 
 import TaskPresenter from 'presenters/TaskPresenter';
+import Form from 'packs/components/TaskBoard/Form';
+import ImageUpload from './ImageUpload';
 
-const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate }) => {
+const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate, onAttachImage, onRemoveImage }) => {
   const [task, setTask] = useState(null);
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
@@ -26,6 +27,18 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
   useEffect(() => {
     onLoadCard(cardId).then(setTask);
   }, []);
+
+  const handleAttachImage = (image) => {
+    onAttachImage(task, image).then(() => {
+      onLoadCard(cardId).then(setTask);
+    });
+  };
+
+  const handleRemoveImage = () => {
+    onRemoveImage(task).then(() => {
+      onLoadCard(cardId).then(setTask);
+    });
+  };
 
   const handleCardUpdate = () => {
     setSaving(true);
@@ -74,6 +87,21 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
           ) : (
             <Form errors={errors} onChange={setTask} task={task} />
           )}
+
+          {isNil(TaskPresenter.imageUrl(task)) ? (
+            <div className={styles.imageUploadContainer}>
+              <ImageUpload onUpload={handleAttachImage} />
+            </div>
+          ) : (
+            <div className={styles.previewContainer}>
+              <a href={TaskPresenter.imageUrl(task)}>
+                <img className={styles.preview} src={TaskPresenter.imageUrl(task)} alt="Attachment" />
+              </a>
+              <Button variant="contained" size="small" color="primary" onClick={handleRemoveImage}>
+                Remove image
+              </Button>
+            </div>
+          )}
         </CardContent>
         <CardActions className={styles.actions}>
           <Button
@@ -101,6 +129,8 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
 };
 
 EditPopup.propTypes = {
+  onRemoveImage: PropTypes.func.isRequired,
+  onAttachImage: PropTypes.func.isRequired,
   onLoadCard: PropTypes.func.isRequired,
   onCardDestroy: PropTypes.func.isRequired,
   onCardUpdate: PropTypes.func.isRequired,

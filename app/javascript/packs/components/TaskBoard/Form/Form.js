@@ -9,8 +9,9 @@ import UserSelect from './UserSelect';
 import TaskPresenter from 'presenters/TaskPresenter';
 
 const Form = ({ errors, onChange, task }) => {
-  const handleChangeTextField = (fieldName) => (event) => onChange({ ...task, [fieldName]: event.target.value });
   const styles = useStyles();
+
+  const handleChangeTextField = (fieldName) => (event) => onChange({ ...task, [fieldName]: event.target.value });
 
   const handleChangeSelect = (fieldName) => (user) => onChange({ ...task, [fieldName]: user });
 
